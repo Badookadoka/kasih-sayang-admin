@@ -1,25 +1,155 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Valentine's Day Flip Book</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine?</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #FFAFBD, #ffc3a0);
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+        }
+        h1 {
+            color: #ff4b5c;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-around;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: transform 0.3s;
+        }
+        .yes {
+            background: #ff4b5c;
+            color: white;
+        }
+        .no {
+            background: #ccc;
+            color: black;
+        }
+        .no:hover {
+            transform: translate(calc(50% - 20px), calc(50% - 20px));
+        }
+            .gallery {
+            --d: 10s;
+            display: grid;
+            place-items: center;
+            width: 220px;
+            margin: 0 auto;
+        }
+        .gallery > img {
+            transition: transform 0.5s ease;
+        }
+        .gallery > img:hover {
+            transform: scale(1.1) rotate(5deg);
+            grid-area: 1/1;
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border: 10px solid #f2f2f2;
+            box-shadow: 0 0 4px #0007;
+            z-index: 2;
+            animation: slide var(--d) infinite, z-order var(--d) infinite steps(1);
+        }
+        .gallery img:last-child {
+            animation-name: slide, z-order-last;
+        }
+        @keyframes slide {
+            10% { transform: translateX(120%) rotate(10deg); }
+            0%, 100%, 20% { transform: translateX(0%) rotate(10deg); }
+        }
+        @keyframes z-order {
+            10%, 20% { z-index: 1; }
+            80% { z-index: 2; }
+        }
+        @keyframes z-order-last {
+            10%, 20% { z-index: 1; }
+            90% { z-index: 2; }
+        }
+        #hedlinecontainer {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        #shine {
+            font-size: 40px;
+            font-weight: bold;
+            color: rgba(255, 0, 102, 0.3);
+            background: -webkit-gradient(linear, left top, right top, from(#222), to(#222), color-stop(0.5, #fff)) 0 0 no-repeat;
+            -webkit-background-size: 150px;
+            -webkit-background-clip: text;
+            -webkit-animation-name: shine;
+            -webkit-animation-duration: 3s;
+            -webkit-animation-iteration-count: infinite;
+            text-shadow: 0 0px 0px rgba(233, 85, 189, 0.419);
+        }
+        @-webkit-keyframes shine {
+            0%, 10% { background-position: -1000px; }
+            20% { background-position: top left; }
+            90% { background-position: top right; }
+            100% { background-position: 1000px; }
+        }
+</style>
 </head>
 <body>
-
-  <div id="hedlinecontainer">
-    <div id="shine">Happy Valentine's Day💞</div>
-  </div>
-  
-
-  <div class="gallery">
-    <img src="https://picsum.photos/id/1013/400/400" alt="a lovely kiss in the night">
-    <img src="https://picsum.photos/id/1013/400/400" alt="a women inside a car">
-    <img src="https://picsum.photos/id/1013/400/400" alt="a baby">
-    <img src="https://picsum.photos/id/1013/400/400" alt="a girl in the forest">
-    <img src="https://picsum.photos/id/1013/400/400" alt="a girl">
-  </div>
-
+    <div class="card">
+        <h1>Will you be my Valentine? ❤️</h1>
+        <div class="buttons">
+            <button class="yes" onclick="showGallery()">Yes</button>
+            <button class="no" onmouseover="moveButton(this)">No</button>
+        </div>
+    </div>
+    <script>
+        function moveButton(btn) {
+            const x = Math.random() * (window.innerWidth - btn.clientWidth);
+            const y = Math.random() * (window.innerHeight - btn.clientHeight);
+            btn.style.position = 'absolute';
+            btn.style.left = `${x}px`;
+            btn.style.top = `${y}px`;
+        }
+    </script>
+    <div id="galleryContainer" style="display:none; opacity: 0; transition: opacity 1s ease-in-out;">
+        <div id="hedlinecontainer">
+            <div id="shine">Happy Valentine's Day💞</div>
+        </div>
+        <div class="gallery">
+            <img src="https://picsum.photos/id/1015/400/400" alt="a lovely kiss in the night">
+            <img src="https://picsum.photos/id/1013/400/400" alt="a woman inside a car">
+            <img src="https://picsum.photos/id/1016/400/400" alt="a baby">
+            <img src="https://picsum.photos/id/1021/400/400" alt="a girl in the forest">
+            <img src="https://picsum.photos/id/1025/400/400" alt="a girl">
+        </div>
+    </div>
+    <script>
+        function showGallery() {
+            document.querySelector('.card').style.opacity = '0';
+            setTimeout(() => {
+                document.querySelector('.card').style.display = 'none';
+                const gallery = document.getElementById('galleryContainer');
+                gallery.style.display = 'block';
+                gallery.style.opacity = '1';
+            }, 500);
+            document.querySelector('.card').style.display = 'none';
+            document.getElementById('galleryContainer').style.display = 'block';
+        }
+    </script>
 </body>
 </html>
