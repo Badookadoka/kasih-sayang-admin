@@ -4,29 +4,52 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Valentine's Day Flip Book</title>
-<link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+  <!-- Headline -->
   <div id="hedlinecontainer">
     <div id="shine">Happy Valentine's Day💞</div>
   </div>
-  
 
+  <!-- Gallery -->
   <div class="gallery">
     <img src="images/selfie-kiss-pair-man-preview 1.png" alt="a lovely kiss in the night">
     <img src="https://picsum.photos/id/1013/400/400" alt="a women inside a car">
     <img src="images/girl-and-boy-romantic-love-7hhjaln7dc787mco 1.png" alt="a baby">
     <img src="images/couple-girl-boy-love-preview 1.png" alt="a girl in the forest">
     <img src="images/photo-1547685325-cd2a90745574 1.png" alt="a girl">
-</div>
-
-<div class="letter-container">
-  <div class="letter" id="letterContent">
-    <p>Selamat Hari Kasih Sayang! 💌</p>
   </div>
-  <button id="nextButton">Next</button>
-</div>
+
+  <!-- Letter and Next Button -->
+  <div class="letter-container">
+    <div class="letter" id="letterContent">
+      <p>Selamat Hari Kasih Sayang! 💌</p>
+    </div>
+    <button id="nextButton">Next</button>
+  </div>
+
+  <script>
+    // Array of romantic messages
+    const letters = [
+      "Selamat Hari Kasih Sayang! 💌",
+      "Cinta adalah bahasa yang tak pernah usang. ❤️",
+      "Terima kasih telah mengisi hari-hariku dengan tawa. 😊",
+      "Kamu adalah alasan aku tersenyum setiap hari. 😍",
+      "Semoga cinta kita selalu abadi. 💞",
+      "Happy Valentine's Day! Kamu segalanya bagiku. 🌹"
+    ];
+
+    // Current index for the letter array
+    let currentIndex = 0;
+
+    // Event listener for Next button
+    document.getElementById("nextButton").addEventListener("click", function() {
+      currentIndex = (currentIndex + 1) % letters.length;
+      document.getElementById("letterContent").innerHTML = `<p>${letters[currentIndex]}</p>`;
+    });
+  </script>
 
 </body>
 </html>
